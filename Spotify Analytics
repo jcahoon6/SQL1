@@ -29,33 +29,34 @@ time_signature integer NOT NULL
 #Next, I explored the data using the following SQL. 
 
 #What is the average danceability by artist and track?
-select artist_name
+SELECT artist_name
 , track_name
 , avg(popularity)
 , avg(danceability)
 , avg(energy)
-from BIT_DB.Spotifydata
-group by artist_name, track_name 
+FROM BIT_DB.Spotifydata
+GROUP BY  artist_name, track_name 
 
 
 #Who are the top 10 artists based on popularity? 
-select artist_name, track_name, popularity
-from BIT_DB.Spotifydata
-order by popularity desc
-limit 10
+SELECT artist_name, track_name, popularity
+FROM BIT_DB.Spotifydata
+ORDER BY popularity desc
+LIMIT 10
 
 
 #What artist released the longest song? 
-select artist_name, max(duration_ms)
-from BIT_DB.Spotifydata
+SELECT artist_name, MAX(duration_ms)
+FROM BIT_DB.Spotifydata
 
 
 #What is the average danceability for the 10 most popular songs? 
-select avg(danceability)
-from(
-select danceability
-from BIT_DB.Spotifydata
-order by popularity desc
-limit 10)
+SELECT avg(danceability)
+FROM(
+SELECT danceability
+FROM BIT_DB.Spotifydata
+ORDER BY popularity desc
+limit 10
+) AS top_10_popular_songs;
 
 
